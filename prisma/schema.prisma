@@ -1,0 +1,68 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  clerkId      String        @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  analyses     PdfAnalysis[]
+  molecules    Molecule[]
+}
+
+model Molecule {
+  id        String   @id @default(cuid())
+  name      String
+  formula   String
+  smiles    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model PdfAnalysis {
+  id        String   @id @default(cuid())
+  fileName  String
+  fileSize  Int?
+  status    String   @default("PENDING") // PENDING, COMPLETED, FAILED
+  result    String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// ==========================================
+// NEW MODELS FOR TOPIC-WISE PREVIOUS PAPERS
+// ==========================================
+
+model ChemistryTopic {
+  id          String                 @id @default(cuid())
+  name        String                 // e.g., "Chemical Bonding", "Coordination Compounds"
+  category    String                 // e.g., "Physical", "Organic", "Inorganic"
+  description String?
+  questions   PreviousYearQuestion[]
+  createdAt   DateTime               @default(now())
+}
+
+model PreviousYearQuestion {
+  id            String         @id @default(cuid())
+  topicId       String
+  topic         ChemistryTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  examName      String         // e.g., "JEE Main", "NEET", "JEE Advanced"
+  year          Int            // e.g., 2025
+  question      String         @db.Text
+  options       String[]       // Array of options for MCQs
+  correctAnswer String         // Correct option or answer value
+  explanation   String         @db.Text // AI step-by-step breakdown
+  difficulty    String         @default("Medium") // Easy, Medium, Hard
+  createdAt     DateTime       @default(now())
+}
