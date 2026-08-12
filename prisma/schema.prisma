@@ -1,6 +1,5 @@
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
 generator client {
@@ -9,13 +8,13 @@ generator client {
 }
 
 model User {
-  id           String        @id @default(cuid())
-  email        String        @unique
-  clerkId      String        @unique
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  analyses     PdfAnalysis[]
-  molecules    Molecule[]
+  id        String       @id @default(cuid())
+  email     String       @unique
+  clerkId   String       @unique
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  analyses  PdfAnalysis[]
+  molecules Molecule[]
 }
 
 model Molecule {
@@ -39,10 +38,6 @@ model PdfAnalysis {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
 }
-
-// ==========================================
-// NEW MODELS FOR TOPIC-WISE PREVIOUS PAPERS
-// ==========================================
 
 model ChemistryTopic {
   id          String                 @id @default(cuid())
