@@ -398,7 +398,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Molecule: 'Molecule'
+  Molecule: 'Molecule',
+  PdfAnalysis: 'PdfAnalysis',
+  ChemistryTopic: 'ChemistryTopic',
+  PreviousYearQuestion: 'PreviousYearQuestion'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "molecule"
+    modelProps: "user" | "molecule" | "pdfAnalysis" | "chemistryTopic" | "previousYearQuestion"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +569,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PdfAnalysis: {
+      payload: Prisma.$PdfAnalysisPayload<ExtArgs>
+      fields: Prisma.PdfAnalysisFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PdfAnalysisFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PdfAnalysisFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        findFirst: {
+          args: Prisma.PdfAnalysisFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PdfAnalysisFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        findMany: {
+          args: Prisma.PdfAnalysisFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>[]
+        }
+        create: {
+          args: Prisma.PdfAnalysisCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        createMany: {
+          args: Prisma.PdfAnalysisCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PdfAnalysisCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>[]
+        }
+        delete: {
+          args: Prisma.PdfAnalysisDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        update: {
+          args: Prisma.PdfAnalysisUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        deleteMany: {
+          args: Prisma.PdfAnalysisDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PdfAnalysisUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PdfAnalysisUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>[]
+        }
+        upsert: {
+          args: Prisma.PdfAnalysisUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PdfAnalysisPayload>
+        }
+        aggregate: {
+          args: Prisma.PdfAnalysisAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePdfAnalysis>
+        }
+        groupBy: {
+          args: Prisma.PdfAnalysisGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PdfAnalysisGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PdfAnalysisCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PdfAnalysisCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChemistryTopic: {
+      payload: Prisma.$ChemistryTopicPayload<ExtArgs>
+      fields: Prisma.ChemistryTopicFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChemistryTopicFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChemistryTopicFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        findFirst: {
+          args: Prisma.ChemistryTopicFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChemistryTopicFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        findMany: {
+          args: Prisma.ChemistryTopicFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>[]
+        }
+        create: {
+          args: Prisma.ChemistryTopicCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        createMany: {
+          args: Prisma.ChemistryTopicCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChemistryTopicCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>[]
+        }
+        delete: {
+          args: Prisma.ChemistryTopicDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        update: {
+          args: Prisma.ChemistryTopicUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChemistryTopicDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChemistryTopicUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChemistryTopicUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChemistryTopicUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChemistryTopicPayload>
+        }
+        aggregate: {
+          args: Prisma.ChemistryTopicAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChemistryTopic>
+        }
+        groupBy: {
+          args: Prisma.ChemistryTopicGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChemistryTopicGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChemistryTopicCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChemistryTopicCountAggregateOutputType> | number
+        }
+      }
+    }
+    PreviousYearQuestion: {
+      payload: Prisma.$PreviousYearQuestionPayload<ExtArgs>
+      fields: Prisma.PreviousYearQuestionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PreviousYearQuestionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PreviousYearQuestionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        findFirst: {
+          args: Prisma.PreviousYearQuestionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PreviousYearQuestionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        findMany: {
+          args: Prisma.PreviousYearQuestionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>[]
+        }
+        create: {
+          args: Prisma.PreviousYearQuestionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        createMany: {
+          args: Prisma.PreviousYearQuestionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PreviousYearQuestionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>[]
+        }
+        delete: {
+          args: Prisma.PreviousYearQuestionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        update: {
+          args: Prisma.PreviousYearQuestionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PreviousYearQuestionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PreviousYearQuestionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PreviousYearQuestionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PreviousYearQuestionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PreviousYearQuestionPayload>
+        }
+        aggregate: {
+          args: Prisma.PreviousYearQuestionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePreviousYearQuestion>
+        }
+        groupBy: {
+          args: Prisma.PreviousYearQuestionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PreviousYearQuestionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PreviousYearQuestionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PreviousYearQuestionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -596,6 +821,9 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -605,15 +833,17 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  password: 'password',
   name: 'name',
+  password: 'password',
+  clerkId: 'clerkId',
   resetToken: 'resetToken',
   resetExpiry: 'resetExpiry',
   stripeCustomerId: 'stripeCustomerId',
   stripeSubscriptionId: 'stripeSubscriptionId',
   stripePriceId: 'stripePriceId',
   stripeStatus: 'stripeStatus',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -622,13 +852,54 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const MoleculeScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  smiles: 'smiles',
   formula: 'formula',
+  smiles: 'smiles',
   userId: 'userId',
   createdAt: 'createdAt'
 } as const
 
 export type MoleculeScalarFieldEnum = (typeof MoleculeScalarFieldEnum)[keyof typeof MoleculeScalarFieldEnum]
+
+
+export const PdfAnalysisScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  status: 'status',
+  result: 'result',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PdfAnalysisScalarFieldEnum = (typeof PdfAnalysisScalarFieldEnum)[keyof typeof PdfAnalysisScalarFieldEnum]
+
+
+export const ChemistryTopicScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type ChemistryTopicScalarFieldEnum = (typeof ChemistryTopicScalarFieldEnum)[keyof typeof ChemistryTopicScalarFieldEnum]
+
+
+export const PreviousYearQuestionScalarFieldEnum = {
+  id: 'id',
+  topicId: 'topicId',
+  examName: 'examName',
+  year: 'year',
+  question: 'question',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  explanation: 'explanation',
+  difficulty: 'difficulty',
+  createdAt: 'createdAt'
+} as const
+
+export type PreviousYearQuestionScalarFieldEnum = (typeof PreviousYearQuestionScalarFieldEnum)[keyof typeof PreviousYearQuestionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -637,6 +908,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {
@@ -661,6 +940,13 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
+ * Reference to a field of type 'String[]'
+ */
+export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -668,9 +954,37 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -826,6 +1140,9 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   molecule?: Prisma.MoleculeOmit
+  pdfAnalysis?: Prisma.PdfAnalysisOmit
+  chemistryTopic?: Prisma.ChemistryTopicOmit
+  previousYearQuestion?: Prisma.PreviousYearQuestionOmit
 }
 
 /* Types for Logging */

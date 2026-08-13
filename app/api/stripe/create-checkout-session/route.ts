@@ -1,12 +1,17 @@
-import { NextResponse } from 'next/server';
-import { Stripe } from 'stripe';
-import { PrismaClient } from '@prisma/client';
-import { auth, currentUser } from '@clerk/nextjs/server'; // Since you are using Clerk
+export const dynamic = 'force-dynamic';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-28.acacia' as any,
-});
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server';
+import Stripe from 'stripe';
+import { auth, currentUser } from '@clerk/nextjs/server';
+import { prisma } from '@/lib/prisma';
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeSecretKey) {
+  throw new Error('STRIPE_SECRET_KEY is not configured');
+}
+
+const stripe = new Stripe(stripeSecretKey);
 
 export async function POST(request: Request) {
   try {
@@ -14,56 +19,113 @@ export async function POST(request: Request) {
     const user = await currentUser();
 
     if (!userId || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
     }
 
     const email = user.emailAddresses[0]?.emailAddress;
 
-    // Find or create local user record mapped to Clerk ID
-    let dbUser = await prisma.user.findUnique({ where: { email } });
+    if (!email) {
+      return NextResponse.json(
+        { error: 'No email address found for user' },
+        { status: 400 }
+      );
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Find the local user using Clerk ID.
+    let dbUser = await prisma.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+    });
+
+    // If the user doesn't exist locally, create the record.
     if (!dbUser) {
       dbUser = await prisma.user.create({
         data: {
-          id: userId,
-          email,
-          password: 'clerk-managed',
+          clerkId: userId,
+          email: normalizedEmail,
+          name:
+            user.firstName || user.lastName
+              ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim()
+              : null,
         },
       });
     }
 
     let customerId = dbUser.stripeCustomerId;
 
-    // Create a Stripe customer if one doesn't exist
+    // Create Stripe customer if one doesn't exist.
     if (!customerId) {
       const customer = await stripe.customers.create({
-        email,
-        metadata: { userId },
+        email: normalizedEmail,
+        metadata: {
+          userId,
+          dbUserId: dbUser.id,
+        },
       });
+
       customerId = customer.id;
+
       await prisma.user.update({
-        where: { id: dbUser.id },
-        data: { stripeCustomerId: customerId },
+        where: {
+          id: dbUser.id,
+        },
+        data: {
+          stripeCustomerId: customerId,
+        },
       });
     }
 
-    // Create Stripe Checkout Session
+    const priceId = process.env.STRIPE_PRO_PRICE_ID;
+
+    if (!priceId) {
+      return NextResponse.json(
+        { error: 'STRIPE_PRO_PRICE_ID is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const appUrl =
+      process.env.NEXT_PUBLIC_APP_URL ||
+      'http://localhost:3000';
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
       line_items: [
         {
-          price: process.env.STRIPE_PRO_PRICE_ID,
+          price: priceId,
           quantity: 1,
         },
       ],
       mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard?canceled=true`,
+
+      success_url:
+        `${appUrl}/dashboard?success=true`,
+
+      cancel_url:
+        `${appUrl}/dashboard?canceled=true`,
+
+      metadata: {
+        userId,
+        dbUserId: dbUser.id,
+      },
     });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({
+      url: session.url,
+    });
   } catch (error) {
-    console.error('Stripe Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Stripe Checkout Error:', error);
+
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }

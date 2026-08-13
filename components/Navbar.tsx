@@ -1,10 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+} from '@clerk/nextjs';
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { user } = useUser();
 
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-4">
@@ -14,30 +19,35 @@ export default function Navbar() {
           <Link href="/" className="text-xl font-bold text-blue-600">
             ChemAI
           </Link>
+
           <div className="flex space-x-4 text-sm font-medium text-gray-600">
-            <Link href="/library" className="hover:text-blue-600 transition">
+            <Link
+              href="/library"
+              className="hover:text-blue-600 transition"
+            >
               Library
             </Link>
           </div>
         </div>
 
-        {/* Right: Authentication Status & Actions */}
+        {/* Right: Clerk Authentication */}
         <div className="flex items-center space-x-4">
-          {status === 'loading' ? (
-            <span className="text-sm text-gray-400">Loading...</span>
-          ) : session ? (
+          <SignedIn>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-700 hidden sm:inline">
-                Hello, <strong className="text-gray-900">{session.user?.name || session.user?.email}</strong>
+                Hello,{' '}
+                <strong className="text-gray-900">
+                  {user?.firstName ||
+                    user?.primaryEmailAddress?.emailAddress ||
+                    'User'}
+                </strong>
               </span>
-              <button
-                onClick={() => signOut({ callbackUrl: '/login' })}
-                className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
-              >
-                Log Out
-              </button>
+
+              <UserButton afterSignOutUrl="/" />
             </div>
-          ) : (
+          </SignedIn>
+
+          <SignedOut>
             <div className="flex items-center space-x-2">
               <Link
                 href="/login"
@@ -45,6 +55,7 @@ export default function Navbar() {
               >
                 Log In
               </Link>
+
               <Link
                 href="/signup"
                 className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
@@ -52,7 +63,7 @@ export default function Navbar() {
                 Sign Up
               </Link>
             </div>
-          )}
+          </SignedOut>
         </div>
       </div>
     </nav>

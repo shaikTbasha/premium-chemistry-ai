@@ -2,12 +2,13 @@
   "name": "premium-chemistry-ai",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "eslint",
-  "postinstall": "prisma generate"
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.31",
@@ -15,6 +16,7 @@
     "@clerk/nextjs": "^7.6.4",
     "@google/genai": "^2.16.0",
     "@prisma/adapter-better-sqlite3": "^7.9.1",
+    "@prisma/adapter-pg": "^7.9.1",
     "@stripe/stripe-js": "^9.13.0",
     "@swc/helpers": "^0.5.23",
     "ai": "^7.0.48",
@@ -27,6 +29,7 @@
     "next": "16.2.12",
     "next-auth": "^4.24.15",
     "openai": "^7.4.0",
+    "pg": "^8.23.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",

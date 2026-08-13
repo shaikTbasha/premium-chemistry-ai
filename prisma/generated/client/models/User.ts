@@ -27,8 +27,9 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
-  password: string | null
   name: string | null
+  password: string | null
+  clerkId: string | null
   resetToken: string | null
   resetExpiry: Date | null
   stripeCustomerId: string | null
@@ -36,13 +37,15 @@ export type UserMinAggregateOutputType = {
   stripePriceId: string | null
   stripeStatus: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
-  password: string | null
   name: string | null
+  password: string | null
+  clerkId: string | null
   resetToken: string | null
   resetExpiry: Date | null
   stripeCustomerId: string | null
@@ -50,13 +53,15 @@ export type UserMaxAggregateOutputType = {
   stripePriceId: string | null
   stripeStatus: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   email: number
-  password: number
   name: number
+  password: number
+  clerkId: number
   resetToken: number
   resetExpiry: number
   stripeCustomerId: number
@@ -64,6 +69,7 @@ export type UserCountAggregateOutputType = {
   stripePriceId: number
   stripeStatus: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -71,8 +77,9 @@ export type UserCountAggregateOutputType = {
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
-  password?: true
   name?: true
+  password?: true
+  clerkId?: true
   resetToken?: true
   resetExpiry?: true
   stripeCustomerId?: true
@@ -80,13 +87,15 @@ export type UserMinAggregateInputType = {
   stripePriceId?: true
   stripeStatus?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
-  password?: true
   name?: true
+  password?: true
+  clerkId?: true
   resetToken?: true
   resetExpiry?: true
   stripeCustomerId?: true
@@ -94,13 +103,15 @@ export type UserMaxAggregateInputType = {
   stripePriceId?: true
   stripeStatus?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
-  password?: true
   name?: true
+  password?: true
+  clerkId?: true
   resetToken?: true
   resetExpiry?: true
   stripeCustomerId?: true
@@ -108,6 +119,7 @@ export type UserCountAggregateInputType = {
   stripePriceId?: true
   stripeStatus?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,8 +198,9 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   email: string
-  password: string
   name: string | null
+  password: string | null
+  clerkId: string | null
   resetToken: string | null
   resetExpiry: Date | null
   stripeCustomerId: string | null
@@ -195,6 +208,7 @@ export type UserGroupByOutputType = {
   stripePriceId: string | null
   stripeStatus: string | null
   createdAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -221,8 +235,9 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  password?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  clerkId?: Prisma.StringNullableFilter<"User"> | string | null
   resetToken?: Prisma.StringNullableFilter<"User"> | string | null
   resetExpiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -230,14 +245,17 @@ export type UserWhereInput = {
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeStatus?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  analyses?: Prisma.PdfAnalysisListRelationFilter
   molecules?: Prisma.MoleculeListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  clerkId?: Prisma.SortOrderInput | Prisma.SortOrder
   resetToken?: Prisma.SortOrderInput | Prisma.SortOrder
   resetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -245,32 +263,38 @@ export type UserOrderByWithRelationInput = {
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  analyses?: Prisma.PdfAnalysisOrderByRelationAggregateInput
   molecules?: Prisma.MoleculeOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  clerkId?: string
+  resetToken?: string
+  stripeCustomerId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  password?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
-  resetToken?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringNullableFilter<"User"> | string | null
   resetExpiry?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeStatus?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  analyses?: Prisma.PdfAnalysisListRelationFilter
   molecules?: Prisma.MoleculeListRelationFilter
-}, "id" | "email">
+}, "id" | "email" | "clerkId" | "resetToken" | "stripeCustomerId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  clerkId?: Prisma.SortOrderInput | Prisma.SortOrder
   resetToken?: Prisma.SortOrderInput | Prisma.SortOrder
   resetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -278,6 +302,7 @@ export type UserOrderByWithAggregationInput = {
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -289,8 +314,9 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  password?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  clerkId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   resetToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   resetExpiry?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -298,13 +324,15 @@ export type UserScalarWhereWithAggregatesInput = {
   stripePriceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stripeStatus?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
   id?: string
   email: string
-  password: string
   name?: string | null
+  password?: string | null
+  clerkId?: string | null
   resetToken?: string | null
   resetExpiry?: Date | string | null
   stripeCustomerId?: string | null
@@ -312,14 +340,17 @@ export type UserCreateInput = {
   stripePriceId?: string | null
   stripeStatus?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  analyses?: Prisma.PdfAnalysisCreateNestedManyWithoutUserInput
   molecules?: Prisma.MoleculeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
-  password: string
   name?: string | null
+  password?: string | null
+  clerkId?: string | null
   resetToken?: string | null
   resetExpiry?: Date | string | null
   stripeCustomerId?: string | null
@@ -327,14 +358,17 @@ export type UserUncheckedCreateInput = {
   stripePriceId?: string | null
   stripeStatus?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  analyses?: Prisma.PdfAnalysisUncheckedCreateNestedManyWithoutUserInput
   molecules?: Prisma.MoleculeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -342,14 +376,17 @@ export type UserUpdateInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  analyses?: Prisma.PdfAnalysisUpdateManyWithoutUserNestedInput
   molecules?: Prisma.MoleculeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -357,14 +394,17 @@ export type UserUncheckedUpdateInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  analyses?: Prisma.PdfAnalysisUncheckedUpdateManyWithoutUserNestedInput
   molecules?: Prisma.MoleculeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   email: string
-  password: string
   name?: string | null
+  password?: string | null
+  clerkId?: string | null
   resetToken?: string | null
   resetExpiry?: Date | string | null
   stripeCustomerId?: string | null
@@ -372,13 +412,15 @@ export type UserCreateManyInput = {
   stripePriceId?: string | null
   stripeStatus?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -386,13 +428,15 @@ export type UserUpdateManyMutationInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -400,13 +444,15 @@ export type UserUncheckedUpdateManyInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  clerkId?: Prisma.SortOrder
   resetToken?: Prisma.SortOrder
   resetExpiry?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
@@ -414,13 +460,15 @@ export type UserCountOrderByAggregateInput = {
   stripePriceId?: Prisma.SortOrder
   stripeStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  clerkId?: Prisma.SortOrder
   resetToken?: Prisma.SortOrder
   resetExpiry?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
@@ -428,13 +476,15 @@ export type UserMaxOrderByAggregateInput = {
   stripePriceId?: Prisma.SortOrder
   stripeStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  clerkId?: Prisma.SortOrder
   resetToken?: Prisma.SortOrder
   resetExpiry?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
@@ -442,6 +492,7 @@ export type UserMinOrderByAggregateInput = {
   stripePriceId?: Prisma.SortOrder
   stripeStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -479,11 +530,26 @@ export type UserUpdateOneRequiredWithoutMoleculesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMoleculesInput, Prisma.UserUpdateWithoutMoleculesInput>, Prisma.UserUncheckedUpdateWithoutMoleculesInput>
 }
 
+export type UserCreateNestedOneWithoutAnalysesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnalysesInput, Prisma.UserUncheckedCreateWithoutAnalysesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnalysesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAnalysesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnalysesInput, Prisma.UserUncheckedCreateWithoutAnalysesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnalysesInput
+  upsert?: Prisma.UserUpsertWithoutAnalysesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnalysesInput, Prisma.UserUpdateWithoutAnalysesInput>, Prisma.UserUncheckedUpdateWithoutAnalysesInput>
+}
+
 export type UserCreateWithoutMoleculesInput = {
   id?: string
   email: string
-  password: string
   name?: string | null
+  password?: string | null
+  clerkId?: string | null
   resetToken?: string | null
   resetExpiry?: Date | string | null
   stripeCustomerId?: string | null
@@ -491,13 +557,16 @@ export type UserCreateWithoutMoleculesInput = {
   stripePriceId?: string | null
   stripeStatus?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  analyses?: Prisma.PdfAnalysisCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMoleculesInput = {
   id?: string
   email: string
-  password: string
   name?: string | null
+  password?: string | null
+  clerkId?: string | null
   resetToken?: string | null
   resetExpiry?: Date | string | null
   stripeCustomerId?: string | null
@@ -505,6 +574,8 @@ export type UserUncheckedCreateWithoutMoleculesInput = {
   stripePriceId?: string | null
   stripeStatus?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  analyses?: Prisma.PdfAnalysisUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMoleculesInput = {
@@ -526,8 +597,9 @@ export type UserUpdateToOneWithWhereWithoutMoleculesInput = {
 export type UserUpdateWithoutMoleculesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -535,13 +607,16 @@ export type UserUpdateWithoutMoleculesInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  analyses?: Prisma.PdfAnalysisUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMoleculesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -549,6 +624,92 @@ export type UserUncheckedUpdateWithoutMoleculesInput = {
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  analyses?: Prisma.PdfAnalysisUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAnalysesInput = {
+  id?: string
+  email: string
+  name?: string | null
+  password?: string | null
+  clerkId?: string | null
+  resetToken?: string | null
+  resetExpiry?: Date | string | null
+  stripeCustomerId?: string | null
+  stripeSubscriptionId?: string | null
+  stripePriceId?: string | null
+  stripeStatus?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  molecules?: Prisma.MoleculeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAnalysesInput = {
+  id?: string
+  email: string
+  name?: string | null
+  password?: string | null
+  clerkId?: string | null
+  resetToken?: string | null
+  resetExpiry?: Date | string | null
+  stripeCustomerId?: string | null
+  stripeSubscriptionId?: string | null
+  stripePriceId?: string | null
+  stripeStatus?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  molecules?: Prisma.MoleculeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAnalysesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnalysesInput, Prisma.UserUncheckedCreateWithoutAnalysesInput>
+}
+
+export type UserUpsertWithoutAnalysesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAnalysesInput, Prisma.UserUncheckedUpdateWithoutAnalysesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnalysesInput, Prisma.UserUncheckedCreateWithoutAnalysesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAnalysesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAnalysesInput, Prisma.UserUncheckedUpdateWithoutAnalysesInput>
+}
+
+export type UserUpdateWithoutAnalysesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  molecules?: Prisma.MoleculeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAnalysesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clerkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  molecules?: Prisma.MoleculeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -557,10 +718,12 @@ export type UserUncheckedUpdateWithoutMoleculesInput = {
  */
 
 export type UserCountOutputType = {
+  analyses: number
   molecules: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  analyses?: boolean | UserCountOutputTypeCountAnalysesArgs
   molecules?: boolean | UserCountOutputTypeCountMoleculesArgs
 }
 
@@ -577,6 +740,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountAnalysesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PdfAnalysisWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountMoleculesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MoleculeWhereInput
 }
@@ -585,8 +755,9 @@ export type UserCountOutputTypeCountMoleculesArgs<ExtArgs extends runtime.Types.
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  password?: boolean
   name?: boolean
+  password?: boolean
+  clerkId?: boolean
   resetToken?: boolean
   resetExpiry?: boolean
   stripeCustomerId?: boolean
@@ -594,6 +765,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   stripePriceId?: boolean
   stripeStatus?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
+  analyses?: boolean | Prisma.User$analysesArgs<ExtArgs>
   molecules?: boolean | Prisma.User$moleculesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -601,8 +774,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  password?: boolean
   name?: boolean
+  password?: boolean
+  clerkId?: boolean
   resetToken?: boolean
   resetExpiry?: boolean
   stripeCustomerId?: boolean
@@ -610,13 +784,15 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   stripePriceId?: boolean
   stripeStatus?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  password?: boolean
   name?: boolean
+  password?: boolean
+  clerkId?: boolean
   resetToken?: boolean
   resetExpiry?: boolean
   stripeCustomerId?: boolean
@@ -624,13 +800,15 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   stripePriceId?: boolean
   stripeStatus?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
-  password?: boolean
   name?: boolean
+  password?: boolean
+  clerkId?: boolean
   resetToken?: boolean
   resetExpiry?: boolean
   stripeCustomerId?: boolean
@@ -638,10 +816,12 @@ export type UserSelectScalar = {
   stripePriceId?: boolean
   stripeStatus?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "name" | "resetToken" | "resetExpiry" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeStatus" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "clerkId" | "resetToken" | "resetExpiry" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  analyses?: boolean | Prisma.User$analysesArgs<ExtArgs>
   molecules?: boolean | Prisma.User$moleculesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -651,13 +831,15 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    analyses: Prisma.$PdfAnalysisPayload<ExtArgs>[]
     molecules: Prisma.$MoleculePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
-    password: string
     name: string | null
+    password: string | null
+    clerkId: string | null
     resetToken: string | null
     resetExpiry: Date | null
     stripeCustomerId: string | null
@@ -665,6 +847,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     stripePriceId: string | null
     stripeStatus: string | null
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1059,6 +1242,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  analyses<T extends Prisma.User$analysesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PdfAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   molecules<T extends Prisma.User$moleculesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$moleculesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MoleculePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1091,8 +1275,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly password: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly clerkId: Prisma.FieldRef<"User", 'String'>
   readonly resetToken: Prisma.FieldRef<"User", 'String'>
   readonly resetExpiry: Prisma.FieldRef<"User", 'DateTime'>
   readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
@@ -1100,6 +1285,7 @@ export interface UserFieldRefs {
   readonly stripePriceId: Prisma.FieldRef<"User", 'String'>
   readonly stripeStatus: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1334,6 +1520,7 @@ export type UserCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Users.
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1352,6 +1539,7 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Users.
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1488,6 +1676,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.analyses
+ */
+export type User$analysesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PdfAnalysis
+   */
+  select?: Prisma.PdfAnalysisSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PdfAnalysis
+   */
+  omit?: Prisma.PdfAnalysisOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PdfAnalysisInclude<ExtArgs> | null
+  where?: Prisma.PdfAnalysisWhereInput
+  orderBy?: Prisma.PdfAnalysisOrderByWithRelationInput | Prisma.PdfAnalysisOrderByWithRelationInput[]
+  cursor?: Prisma.PdfAnalysisWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PdfAnalysisScalarFieldEnum | Prisma.PdfAnalysisScalarFieldEnum[]
 }
 
 /**

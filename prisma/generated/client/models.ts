@@ -10,4 +10,7 @@
  */
 export type * from './models/User'
 export type * from './models/Molecule'
+export type * from './models/PdfAnalysis'
+export type * from './models/ChemistryTopic'
+export type * from './models/PreviousYearQuestion'
 export type * from './commonInputTypes'

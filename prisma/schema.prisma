@@ -3,16 +3,25 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "./generated/client"
 }
 
 model User {
-  id        String       @id @default(cuid())
-  email     String       @unique
-  clerkId   String       @unique
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id                   String                 @id @default(cuid())
+  email                String                 @unique
+  name                 String?
+  password             String?
+  clerkId              String?                @unique
+  resetToken           String?                @unique
+  resetExpiry          DateTime?
+  stripeCustomerId     String?                @unique
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  stripeStatus         String?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+
   analyses  PdfAnalysis[]
   molecules Molecule[]
 }
@@ -23,41 +32,51 @@ model Molecule {
   formula   String
   smiles    String
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model PdfAnalysis {
   id        String   @id @default(cuid())
   fileName  String
   fileSize  Int?
-  status    String   @default("PENDING") // PENDING, COMPLETED, FAILED
+  status    String   @default("PENDING")
   result    String?  @db.Text
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model ChemistryTopic {
   id          String                 @id @default(cuid())
-  name        String                 // e.g., "Chemical Bonding", "Coordination Compounds"
-  category    String                 // e.g., "Physical", "Organic", "Inorganic"
+  name        String
+  category    String
   description String?
   questions   PreviousYearQuestion[]
   createdAt   DateTime               @default(now())
+
+  @@index([category])
 }
 
 model PreviousYearQuestion {
   id            String         @id @default(cuid())
   topicId       String
   topic         ChemistryTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  examName      String         // e.g., "JEE Main", "NEET", "JEE Advanced"
-  year          Int            // e.g., 2025
+  examName      String
+  year          Int
   question      String         @db.Text
-  options       String[]       // Array of options for MCQs
-  correctAnswer String         // Correct option or answer value
-  explanation   String         @db.Text // AI step-by-step breakdown
-  difficulty    String         @default("Medium") // Easy, Medium, Hard
+  options       String[]
+  correctAnswer String
+  explanation   String         @db.Text
+  difficulty    String         @default("Medium")
   createdAt     DateTime       @default(now())
+
+  @@index([topicId])
+  @@index([examName])
+  @@index([year])
 }

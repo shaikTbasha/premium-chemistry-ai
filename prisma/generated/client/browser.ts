@@ -27,3 +27,18 @@ export type User = Prisma.UserModel
  * 
  */
 export type Molecule = Prisma.MoleculeModel
+/**
+ * Model PdfAnalysis
+ * 
+ */
+export type PdfAnalysis = Prisma.PdfAnalysisModel
+/**
+ * Model ChemistryTopic
+ * 
+ */
+export type ChemistryTopic = Prisma.ChemistryTopicModel
+/**
+ * Model PreviousYearQuestion
+ * 
+ */
+export type PreviousYearQuestion = Prisma.PreviousYearQuestionModel

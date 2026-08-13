@@ -1,69 +1,139 @@
-import { NextResponse } from 'next/server';
-import { Stripe } from 'stripe';
-import { PrismaClient } from '@prisma/client';
-import { headers } from 'next/headers'; // Wait, headers from next/headers
+export const dynamic = 'force-dynamic';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-28.acacia' as any,
-});
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server';
+import Stripe from 'stripe';
+import { headers } from 'next/headers';
+import { prisma } from '@/lib/prisma';
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+if (!stripeSecretKey) {
+  throw new Error('STRIPE_SECRET_KEY is not configured');
+}
+
+const stripe = new Stripe(stripeSecretKey);
 
 export async function POST(request: Request) {
   const body = await request.text();
-  const signature = (await headers()).get('stripe-signature');
+
+  const requestHeaders = await headers();
+  const signature = requestHeaders.get('stripe-signature');
+
+  if (!signature || !webhookSecret) {
+    return NextResponse.json(
+      { error: 'Missing Stripe signature or webhook secret' },
+      { status: 400 }
+    );
+  }
 
   let event: Stripe.Event;
 
   try {
-    if (!signature || !process.env.STRIPE_WEBHOOK_SECRET) {
-      return NextResponse.json({ error: 'Missing signature or webhook secret' }, { status: 400 });
-    }
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET);
-  } catch (err: any) {
-    console.error(`Webhook signature verification failed: ${err.message}`);
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      webhookSecret
+    );
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : 'Invalid webhook signature';
+
+    console.error(
+      `Stripe webhook signature verification failed: ${message}`
+    );
+
+    return NextResponse.json(
+      { error: `Webhook Error: ${message}` },
+      { status: 400 }
+    );
   }
 
-  // Handle the event
-  switch (event.type) {
-    case 'checkout.session.completed': {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const customerId = session.customer as string;
-      const subscriptionId = session.subscription as string;
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed': {
+        const session =
+          event.data.object as Stripe.Checkout.Session;
 
-      if (subscriptionId) {
-        // Fetch subscription details to get price and status
-        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-        
-        await prisma.user.updateMany({
-          where: { stripeCustomerId: customerId },
-          data: {
-            stripeSubscriptionId: subscriptionId,
-            stripePriceId: subscription.items.data[0].price.id,
-            stripeStatus: subscription.status, // e.g., 'active'
-          },
-        });
+        const customerId =
+          typeof session.customer === 'string'
+            ? session.customer
+            : null;
+
+        const subscriptionId =
+          typeof session.subscription === 'string'
+            ? session.subscription
+            : null;
+
+        if (customerId && subscriptionId) {
+          const subscription =
+            await stripe.subscriptions.retrieve(subscriptionId);
+
+          const priceId =
+            subscription.items.data[0]?.price?.id ?? null;
+
+          await prisma.user.updateMany({
+            where: {
+              stripeCustomerId: customerId,
+            },
+            data: {
+              stripeSubscriptionId: subscription.id,
+              stripePriceId: priceId,
+              stripeStatus: subscription.status,
+            },
+          });
+        }
+
+        break;
       }
-      break;
-    }
-    case 'customer.subscription.updated':
-    case 'customer.subscription.deleted': {
-      const subscription = event.data.object as Stripe.Subscription;
-      const customerId = subscription.customer as string;
 
-      await prisma.user.updateMany({
-        where: { stripeCustomerId: customerId },
-        data: {
-          stripeSubscriptionId: subscription.id,
-          stripePriceId: subscription.items.data[0].price.id,
-          stripeStatus: subscription.status,
-        },
-      });
-      break;
+      case 'customer.subscription.updated':
+      case 'customer.subscription.deleted': {
+        const subscription =
+          event.data.object as Stripe.Subscription;
+
+        const customerId =
+          typeof subscription.customer === 'string'
+            ? subscription.customer
+            : null;
+
+        if (customerId) {
+          const priceId =
+            subscription.items.data[0]?.price?.id ?? null;
+
+          await prisma.user.updateMany({
+            where: {
+              stripeCustomerId: customerId,
+            },
+            data: {
+              stripeSubscriptionId: subscription.id,
+              stripePriceId: priceId,
+              stripeStatus: subscription.status,
+            },
+          });
+        }
+
+        break;
+      }
+
+      default:
+        console.log(
+          `Unhandled Stripe event type: ${event.type}`
+        );
     }
-    default:
-      console.UnhandledEvent(`Unhandled event type ${event.type}`);
+
+    return NextResponse.json(
+      { received: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Stripe webhook processing error:', error);
+
+    return NextResponse.json(
+      { error: 'Webhook processing failed' },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ received: true }, { status: 200 });
 }

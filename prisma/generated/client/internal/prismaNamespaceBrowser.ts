@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Molecule: 'Molecule'
+  Molecule: 'Molecule',
+  PdfAnalysis: 'PdfAnalysis',
+  ChemistryTopic: 'ChemistryTopic',
+  PreviousYearQuestion: 'PreviousYearQuestion'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -62,6 +65,9 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
@@ -71,15 +77,17 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  password: 'password',
   name: 'name',
+  password: 'password',
+  clerkId: 'clerkId',
   resetToken: 'resetToken',
   resetExpiry: 'resetExpiry',
   stripeCustomerId: 'stripeCustomerId',
   stripeSubscriptionId: 'stripeSubscriptionId',
   stripePriceId: 'stripePriceId',
   stripeStatus: 'stripeStatus',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -88,13 +96,54 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const MoleculeScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  smiles: 'smiles',
   formula: 'formula',
+  smiles: 'smiles',
   userId: 'userId',
   createdAt: 'createdAt'
 } as const
 
 export type MoleculeScalarFieldEnum = (typeof MoleculeScalarFieldEnum)[keyof typeof MoleculeScalarFieldEnum]
+
+
+export const PdfAnalysisScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  status: 'status',
+  result: 'result',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PdfAnalysisScalarFieldEnum = (typeof PdfAnalysisScalarFieldEnum)[keyof typeof PdfAnalysisScalarFieldEnum]
+
+
+export const ChemistryTopicScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type ChemistryTopicScalarFieldEnum = (typeof ChemistryTopicScalarFieldEnum)[keyof typeof ChemistryTopicScalarFieldEnum]
+
+
+export const PreviousYearQuestionScalarFieldEnum = {
+  id: 'id',
+  topicId: 'topicId',
+  examName: 'examName',
+  year: 'year',
+  question: 'question',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  explanation: 'explanation',
+  difficulty: 'difficulty',
+  createdAt: 'createdAt'
+} as const
+
+export type PreviousYearQuestionScalarFieldEnum = (typeof PreviousYearQuestionScalarFieldEnum)[keyof typeof PreviousYearQuestionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -103,6 +152,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {

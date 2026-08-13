@@ -27,8 +27,8 @@ export type AggregateMolecule = {
 export type MoleculeMinAggregateOutputType = {
   id: string | null
   name: string | null
-  smiles: string | null
   formula: string | null
+  smiles: string | null
   userId: string | null
   createdAt: Date | null
 }
@@ -36,8 +36,8 @@ export type MoleculeMinAggregateOutputType = {
 export type MoleculeMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  smiles: string | null
   formula: string | null
+  smiles: string | null
   userId: string | null
   createdAt: Date | null
 }
@@ -45,8 +45,8 @@ export type MoleculeMaxAggregateOutputType = {
 export type MoleculeCountAggregateOutputType = {
   id: number
   name: number
-  smiles: number
   formula: number
+  smiles: number
   userId: number
   createdAt: number
   _all: number
@@ -56,8 +56,8 @@ export type MoleculeCountAggregateOutputType = {
 export type MoleculeMinAggregateInputType = {
   id?: true
   name?: true
-  smiles?: true
   formula?: true
+  smiles?: true
   userId?: true
   createdAt?: true
 }
@@ -65,8 +65,8 @@ export type MoleculeMinAggregateInputType = {
 export type MoleculeMaxAggregateInputType = {
   id?: true
   name?: true
-  smiles?: true
   formula?: true
+  smiles?: true
   userId?: true
   createdAt?: true
 }
@@ -74,8 +74,8 @@ export type MoleculeMaxAggregateInputType = {
 export type MoleculeCountAggregateInputType = {
   id?: true
   name?: true
-  smiles?: true
   formula?: true
+  smiles?: true
   userId?: true
   createdAt?: true
   _all?: true
@@ -156,8 +156,8 @@ export type MoleculeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type MoleculeGroupByOutputType = {
   id: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   userId: string
   createdAt: Date
   _count: MoleculeCountAggregateOutputType | null
@@ -186,8 +186,8 @@ export type MoleculeWhereInput = {
   NOT?: Prisma.MoleculeWhereInput | Prisma.MoleculeWhereInput[]
   id?: Prisma.StringFilter<"Molecule"> | string
   name?: Prisma.StringFilter<"Molecule"> | string
-  smiles?: Prisma.StringFilter<"Molecule"> | string
   formula?: Prisma.StringFilter<"Molecule"> | string
+  smiles?: Prisma.StringFilter<"Molecule"> | string
   userId?: Prisma.StringFilter<"Molecule"> | string
   createdAt?: Prisma.DateTimeFilter<"Molecule"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -196,8 +196,8 @@ export type MoleculeWhereInput = {
 export type MoleculeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  smiles?: Prisma.SortOrder
   formula?: Prisma.SortOrder
+  smiles?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -209,8 +209,8 @@ export type MoleculeWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MoleculeWhereInput[]
   NOT?: Prisma.MoleculeWhereInput | Prisma.MoleculeWhereInput[]
   name?: Prisma.StringFilter<"Molecule"> | string
-  smiles?: Prisma.StringFilter<"Molecule"> | string
   formula?: Prisma.StringFilter<"Molecule"> | string
+  smiles?: Prisma.StringFilter<"Molecule"> | string
   userId?: Prisma.StringFilter<"Molecule"> | string
   createdAt?: Prisma.DateTimeFilter<"Molecule"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -219,8 +219,8 @@ export type MoleculeWhereUniqueInput = Prisma.AtLeast<{
 export type MoleculeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  smiles?: Prisma.SortOrder
   formula?: Prisma.SortOrder
+  smiles?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MoleculeCountOrderByAggregateInput
@@ -234,8 +234,8 @@ export type MoleculeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MoleculeScalarWhereWithAggregatesInput | Prisma.MoleculeScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
   name?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
-  smiles?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
   formula?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
+  smiles?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Molecule"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Molecule"> | Date | string
 }
@@ -243,8 +243,8 @@ export type MoleculeScalarWhereWithAggregatesInput = {
 export type MoleculeCreateInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMoleculesInput
 }
@@ -252,8 +252,8 @@ export type MoleculeCreateInput = {
 export type MoleculeUncheckedCreateInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   userId: string
   createdAt?: Date | string
 }
@@ -261,8 +261,8 @@ export type MoleculeUncheckedCreateInput = {
 export type MoleculeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMoleculesNestedInput
 }
@@ -270,8 +270,8 @@ export type MoleculeUpdateInput = {
 export type MoleculeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -279,8 +279,8 @@ export type MoleculeUncheckedUpdateInput = {
 export type MoleculeCreateManyInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   userId: string
   createdAt?: Date | string
 }
@@ -288,16 +288,16 @@ export type MoleculeCreateManyInput = {
 export type MoleculeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MoleculeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -315,8 +315,8 @@ export type MoleculeOrderByRelationAggregateInput = {
 export type MoleculeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  smiles?: Prisma.SortOrder
   formula?: Prisma.SortOrder
+  smiles?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -324,8 +324,8 @@ export type MoleculeCountOrderByAggregateInput = {
 export type MoleculeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  smiles?: Prisma.SortOrder
   formula?: Prisma.SortOrder
+  smiles?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -333,8 +333,8 @@ export type MoleculeMaxOrderByAggregateInput = {
 export type MoleculeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  smiles?: Prisma.SortOrder
   formula?: Prisma.SortOrder
+  smiles?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -384,16 +384,16 @@ export type MoleculeUncheckedUpdateManyWithoutUserNestedInput = {
 export type MoleculeCreateWithoutUserInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   createdAt?: Date | string
 }
 
 export type MoleculeUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   createdAt?: Date | string
 }
 
@@ -404,6 +404,7 @@ export type MoleculeCreateOrConnectWithoutUserInput = {
 
 export type MoleculeCreateManyUserInputEnvelope = {
   data: Prisma.MoleculeCreateManyUserInput | Prisma.MoleculeCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type MoleculeUpsertWithWhereUniqueWithoutUserInput = {
@@ -428,8 +429,8 @@ export type MoleculeScalarWhereInput = {
   NOT?: Prisma.MoleculeScalarWhereInput | Prisma.MoleculeScalarWhereInput[]
   id?: Prisma.StringFilter<"Molecule"> | string
   name?: Prisma.StringFilter<"Molecule"> | string
-  smiles?: Prisma.StringFilter<"Molecule"> | string
   formula?: Prisma.StringFilter<"Molecule"> | string
+  smiles?: Prisma.StringFilter<"Molecule"> | string
   userId?: Prisma.StringFilter<"Molecule"> | string
   createdAt?: Prisma.DateTimeFilter<"Molecule"> | Date | string
 }
@@ -437,32 +438,32 @@ export type MoleculeScalarWhereInput = {
 export type MoleculeCreateManyUserInput = {
   id?: string
   name: string
-  smiles: string
   formula: string
+  smiles: string
   createdAt?: Date | string
 }
 
 export type MoleculeUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MoleculeUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MoleculeUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   formula?: Prisma.StringFieldUpdateOperationsInput | string
+  smiles?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -471,8 +472,8 @@ export type MoleculeUncheckedUpdateManyWithoutUserInput = {
 export type MoleculeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  smiles?: boolean
   formula?: boolean
+  smiles?: boolean
   userId?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -481,8 +482,8 @@ export type MoleculeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type MoleculeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  smiles?: boolean
   formula?: boolean
+  smiles?: boolean
   userId?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -491,8 +492,8 @@ export type MoleculeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MoleculeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  smiles?: boolean
   formula?: boolean
+  smiles?: boolean
   userId?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -501,13 +502,13 @@ export type MoleculeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MoleculeSelectScalar = {
   id?: boolean
   name?: boolean
-  smiles?: boolean
   formula?: boolean
+  smiles?: boolean
   userId?: boolean
   createdAt?: boolean
 }
 
-export type MoleculeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "smiles" | "formula" | "userId" | "createdAt", ExtArgs["result"]["molecule"]>
+export type MoleculeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "formula" | "smiles" | "userId" | "createdAt", ExtArgs["result"]["molecule"]>
 export type MoleculeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -526,8 +527,8 @@ export type $MoleculePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    smiles: string
     formula: string
+    smiles: string
     userId: string
     createdAt: Date
   }, ExtArgs["result"]["molecule"]>
@@ -956,8 +957,8 @@ export interface Prisma__MoleculeClient<T, Null = never, ExtArgs extends runtime
 export interface MoleculeFieldRefs {
   readonly id: Prisma.FieldRef<"Molecule", 'String'>
   readonly name: Prisma.FieldRef<"Molecule", 'String'>
-  readonly smiles: Prisma.FieldRef<"Molecule", 'String'>
   readonly formula: Prisma.FieldRef<"Molecule", 'String'>
+  readonly smiles: Prisma.FieldRef<"Molecule", 'String'>
   readonly userId: Prisma.FieldRef<"Molecule", 'String'>
   readonly createdAt: Prisma.FieldRef<"Molecule", 'DateTime'>
 }
@@ -1194,6 +1195,7 @@ export type MoleculeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Molecules.
    */
   data: Prisma.MoleculeCreateManyInput | Prisma.MoleculeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1212,6 +1214,7 @@ export type MoleculeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many Molecules.
    */
   data: Prisma.MoleculeCreateManyInput | Prisma.MoleculeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
